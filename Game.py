@@ -1,6 +1,7 @@
 import pygame
 import time
 
+from cave import generate_cave
 from entity import Player
 from menu import Button
 
@@ -23,7 +24,7 @@ class Background:
         self.width = width
         self.image = pygame.image.load(path)
 
-bg = Background(0, -300, 1000, 2000, 'resources/border.png')
+bg = generate_cave(600 // 15, 900 // 15)
 
 # Main Menu Aspects
 menu_bg = Background(0, 0, screen_height, screen_width, 'resources/menu/menu_bg.png')
@@ -39,7 +40,7 @@ def draw_menu():
 
 # Character Creation
 # Class definition in entity.py
-#user = Player(450, 350, 13, 30, 100, 5, 3)
+user = Player(450, 350, 13, 30, 100, 5, 3)
 
 # Main Draw function
 def redraw():
