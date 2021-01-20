@@ -9,7 +9,7 @@ class Entity:
     """
     def __init__(self, x, y, width, height, max_hp, attack, speed):
         self.x = x
-        self.y = ya
+        self.y = y
         self.width = width
         self.height = height
         self.max_hp = max_hp
