@@ -1,6 +1,43 @@
 import pygame
 from random import randint
 
+class Cell:
+    def __init__(self, x_in, y_in, sprite_in = ''):
+        self.x = x_in
+        self.y = y_in
+        self.sprite = sprite_in
+
+class Cave:
+    def __init__(self, columns, rows):
+        self.cave = generate_cave(columns, rows)
+        self.sprites = []
+        for y in range(len(self.cave)):
+            row = []
+            for x in range(len(self.cave[0])):
+                if self.cave[y][x]:  # rock wall
+                    row.append(Cell(x, y, "resources\\floor_tiles\\dirt\\dark.png"))
+                elif self.cave[y-1][x] and self.cave[y][x-1]:  # top left
+                    row.append(Cell(x, y, "resources\\floor_tiles\\dirt\\top_left.png"))
+                elif self.cave[y-1][x] and self.cave[y][x+1]:  # top right
+                    row.append(Cell(x, y, "resources\\floor_tiles\\dirt\\top_right.png"))
+                elif self.cave[y-1][x]:  # top middle
+                    row.append(Cell(x, y, "resources\\floor_tiles\\dirt\\top_middle.png"))
+                elif self.cave[y][x-1] and self.cave[y+1][x]:  # bottom left
+                    row.append(Cell(x, y, "resources\\floor_tiles\\dirt\\bottom_left.png"))
+                elif self.cave[y][x+1] and self.cave[y+1][x]:  # bottom right
+                    row.append(Cell(x, y, "resources\\floor_tiles\\dirt\\bottom_right.png"))
+                elif self.cave[y+1][x]:  # bottom middle
+                    row.append(Cell(x, y, "resources\\floor_tiles\\dirt\\bottom_middle.png"))
+                elif self.cave[y][x-1]:  # middle left
+                    row.append(Cell(x, y, "resources\\floor_tiles\\dirt\\middle_left.png"))
+                elif self.cave[y][x+1]:  # middle right
+                    row.append(Cell(x, y, "resources\\floor_tiles\\dirt\\middle_right.png"))
+                else:  # middle middle
+                    row.append(Cell(x, y, "resources\\floor_tiles\\dirt\\middle_middle.png"))
+            self.sprites.append(row)
+
+
+        
 
 def generate_cave(x, y):
     '''

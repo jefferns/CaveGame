@@ -1,7 +1,7 @@
 import pygame
 import time
 
-from cave import generate_cave
+from cave import Cave
 from entity import Player
 from menu import Button
 
@@ -24,7 +24,8 @@ class Background:
         self.width = width
         self.image = pygame.image.load(path)
 
-bg = generate_cave(600 // 15, 900 // 15)
+# Generate inital cave
+cave = Cave(screen_height // 15, screen_width // 15)
 
 # Main Menu Aspects
 menu_bg = Background(0, 0, screen_height, screen_width, 'resources/menu/menu_bg.png')
@@ -44,7 +45,9 @@ user = Player(450, 350, 13, 30, 100, 5, 3)
 
 # Main Draw function
 def redraw():
-    window.blit(bg.image, (bg.x, bg.y))  # displaying background
+    for row in cave.sprites:
+        for cell in row:
+            window.blit(pygame.image.load(cell.sprite), (cell.x * 15, cell.y * 15))
     window.blit(user.still_sprite, (user.x, user.y))
     pygame.display.update()
 
