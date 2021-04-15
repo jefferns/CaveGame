@@ -24,6 +24,19 @@ class Entity:
         self.still_sprite = pygame.image.load('resources/circle.png')
         self.walk_sprites_right = []
         self.walk_sprites_left = []
+    
+    def get_cells(self, cave):
+        """
+        Return list of the current cell and neighbor cells 
+        """
+        cells = []
+        for row in cave.sprites:
+            for cell in row:
+                if (cell.x*15 in range(self.x - 30, self.x + 30)) and (cell.y*15 in range(self.y - 30, self.y + 30)):
+                    cells += [cell]
+        return cells
+
+
 
     def move_right():
         """
@@ -69,6 +82,18 @@ class Player(Entity):
 
     def draw(self, window, sprite):
         return
+    
+    def move_left(self, speed):
+        self.x -= speed
+
+    def move_right(self, speed):
+        self.x += speed
+
+    def move_up(self, speed):
+        self.y -= speed
+    
+    def move_down(self, speed):
+        self.y += speed
 
 
 class Zombie(Entity):

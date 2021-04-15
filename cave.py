@@ -37,8 +37,6 @@ class Cave:
             self.sprites.append(row)
 
 
-        
-
 def generate_cave(x, y):
     '''
     Returns an array of bools. True represents a wall, False is open space.
